@@ -7,7 +7,7 @@ setup(
 	py_modules=['member'],
 	entry_points={
 		'console_scripts' : [
-			'member=member'
+			'member=member:main'
 		]
 	}
 )
