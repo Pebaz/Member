@@ -13,6 +13,7 @@ def main():
 		f'time.sleep({seconds}); '
 		f'root = tkinter.Tk(); '
 		f'root.withdraw(); '
+		f'root.attributes("-topmost", True); '
 		f'tkinter.messagebox.showwarning("Member?", {repr(message)})'
 	)
 
