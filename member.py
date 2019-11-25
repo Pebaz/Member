@@ -1,4 +1,4 @@
-import sys
+import sys, subprocess
 
 def main():
 	if len(sys.argv) < 3:
@@ -8,27 +8,13 @@ def main():
 
 	_, seconds, message = sys.argv
 
-	# Windows
-	if sys.platform == 'win32':
-		import subprocess
+	command = (
+		f'import time, tkinter.messagebox; '
+		f'time.sleep({seconds}); '
+		f'root = tkinter.Tk(); '
+		f'root.withdraw(); '
+		f'tkinter.messagebox.showwarning("Member?", {repr(message)})'
+	)
 
-		command = (
-			f'import time, tkinter.messagebox; '
-			f'time.sleep({seconds}); '
-			f'root = tkinter.Tk(); '
-			f'root.withdraw(); '
-			f'tkinter.messagebox.showwarning("Member?", {repr(message)})'
-		)
-
-		subprocess.Popen(['pythonw', '-c', command])
-
-	# *Nix platforms
-	else:
-		import os
-		n = os.fork()
-		if n == 0:
-			import time, tkinter.messagebox
-			time.sleep({seconds})
-			root = tkinter.Tk()
-			root.withdraw()
-			tkinter.messagebox.showwarning("Member?", {repr(message)})
+	python = 'python' if sys.platform == 'win32' else 'python3'
+	subprocess.Popen([python, '-c', command])
