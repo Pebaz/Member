@@ -14,6 +14,7 @@ def main():
 		f'root = tkinter.Tk(); '
 		f'root.withdraw(); '
 		f'root.attributes("-topmost", True); '
+		f'root.lift(); '
 		f'tkinter.messagebox.showwarning("Member?", {repr(message)})'
 	)
 
