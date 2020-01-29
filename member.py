@@ -1,24 +1,35 @@
 import sys, os, subprocess
 
 def main():
+	help_msg = lambda: print(
+		'Member v0.2.0 - Timed Messagebox Reminders\n'
+		'Note: Reminders do not persist after reboot\n'
+		'Usage: member <waiting period> <message>\n'
+		'       member -h | --help'
+	)
+
+	format_msg = lambda: print(
+		'Waiting Period Format:\n'
+		'       Seconds: 1s 60s 90s\n'
+		'       Minutes: 1m 1.387m 90m\n'
+		'       Hours:   1h 1.5h 0.33h'
+	)
+
 	if len(sys.argv) < 3:
 		if '-h' in sys.argv or '--help' in sys.argv:
-			print('Waiting Period Format:')
-			print('       Seconds: 1s 60s 90s')
-			print('       Minutes: 1m 1.387m 90m')
-			print('       Hours:   1h 1.5h 0.33h')
-
+			format_msg()
 		else:
-			print('Member v0.2.0 - Timed Messagebox Reminders')
-			print('Note: Reminders do not persist after reboot')
-			print('Usage: member <waiting period> <message>')
-			print('       member -h | --help')
-
+			help_msg()
 		exit()
 
 	_, wait, message = sys.argv
 
 	durations = {'s' : 1, 'm' : 60, 'h' : 60 * 60}
+
+	if wait[-1] not in durations:
+		print(f'Error: Invalid waiting period format.\n')
+		format_msg()
+		exit()
 
 	for form in durations:
 		if form in wait:
