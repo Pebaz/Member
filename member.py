@@ -2,11 +2,28 @@ import sys, os, subprocess
 
 def main():
 	if len(sys.argv) < 3:
-		print('Member v0.1.0 - Timed Messagebox Reminders')
-		print('Usage: member <minutes> <message>')
+		if '-h' in sys.argv or '--help' in sys.argv:
+			print('Waiting Period Format:')
+			print('       Seconds: 1s 60s 90s')
+			print('       Minutes: 1m 1.387m 90m')
+			print('       Hours:   1h 1.5h 0.33h')
+
+		else:
+			print('Member v0.2.0 - Timed Messagebox Reminders')
+			print('Note: Reminders do not persist after reboot')
+			print('Usage: member <waiting period> <message>')
+			print('       member -h | --help')
+
 		exit()
 
-	_, seconds, message = sys.argv
+	_, wait, message = sys.argv
+
+	durations = {'s' : 1, 'm' : 60, 'h' : 60 * 60}
+
+	for form in durations:
+		if form in wait:
+			duration, form, _ = wait.partition(form)
+			seconds = float(duration) * durations[form]
 
 	command = (
 		f'import time, os, tkinter.messagebox; '
@@ -24,3 +41,7 @@ def main():
 
 	python = 'python' if sys.platform == 'win32' else 'python3'
 	subprocess.Popen([python, '-c', command])
+
+
+if __name__ == '__main__':
+	main()
