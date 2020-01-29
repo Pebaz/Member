@@ -6,7 +6,11 @@ Timed Messagebox Reminders
 
 > 'Member when there weren't as many JavaScript frameworks? 'Member?
 
-Launchable from the command line for quick and easy reminders.
+Launchable from the command line for quick and easy reminders. Works on:
+
+ * Windows
+ * MacOS
+ * Linux
 
 ## Installation
 
