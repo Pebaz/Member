@@ -21,8 +21,11 @@ def main():
 		else:
 			help_msg()
 		exit()
-
-	_, wait, message = sys.argv
+	elif len(sys.argv) > 3:
+		wait = sys.argv[1]
+		message = ' '.join(sys.argv[2:])
+	else:
+		_, wait, message = sys.argv
 
 	durations = {'s' : 1, 'm' : 60, 'h' : 60 * 60}
 
