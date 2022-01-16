@@ -1,3 +1,7 @@
+<p align=center>
+    <img src="misc/Member.png" alt="Member Logo" width=60%>
+</p>
+
 # Member
 
 ![Project License](https://img.shields.io/github/license/Pebaz/Member)
