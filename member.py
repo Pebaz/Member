@@ -25,7 +25,7 @@ def main():
 	elif len(sys.argv) > 3:
 		wait = sys.argv[1]
 		message = ' '.join(sys.argv[2:])
-		
+
 	else:
 		_, wait, message = sys.argv
 
@@ -56,7 +56,11 @@ def main():
 	command += f'tkinter.messagebox.showwarning("Member?", {repr(message)})'
 
 	python = 'python' if sys.platform == 'win32' else 'python3'
-	subprocess.Popen([python, '-c', command])
+
+	subprocess.Popen(
+		[python, '-c', command],
+		env=dict(TK_SILENCE_DEPRECATION='1')  # MacOS system version of Tk
+	)
 
 
 if __name__ == '__main__':
